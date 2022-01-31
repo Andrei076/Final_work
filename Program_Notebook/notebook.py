@@ -10,6 +10,19 @@ menu = """
 class Notebook:
     def menu(self):
         print(f"\n Записная книжка\n Меню:{menu}")
+        try:
+            with open('notebook.txt', 'r', encoding='utf-8') as d:
+                a = d.readlines()
+            if len(a) == 0:
+                print("Пока нет загруженых записей ")
+            else:
+                if len(a) % 10 == 1:
+                    print(f"Загружено: {len(a)} запись")
+                else:
+                    print(f"загружено: {len(a)} записей")
+        except FileNotFoundError:
+            print("Файла notebook.txt нет, нужно его создать с помощью "
+                  "первого пункта меню")
         while True:
             try:
                 choice = int(input("Введите номер пункта меню"))
@@ -60,7 +73,7 @@ class Notebook:
         return list_dict_notes
 
     def add(self):
-        print("Добавляем запись\nПоля помеченные * обязательны к заполнению")
+        print("Добавляем запись\nПоля помеченные * обязательны к заполнению\n")
         while True:
             name = input("*Введите Имя: ")
             if name == "":
